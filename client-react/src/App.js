@@ -6,6 +6,7 @@ import Login from './components/authentication/Login';
 import Home from './components/home/Home';
 import Waiting from './components/waitingRoom/WaitingPage';
 import NavBar from './components/NavBar';
+import ListDrugs from './components/prescription/ListDrugs';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/waiting" element={<Waiting />} />
+          <Route path="/list" element={<ListDrugs />} />
         </Routes>
     </BrowserRouter >
   );
