@@ -22,7 +22,7 @@ function LoginPage() {
         console.log(email);
         console.log(password);
         if(email === "email" && password === "password"){
-            navigate('/home');
+            navigate('/waiting');
         }
         // fetch("/login", {
         //     method: "POST",
