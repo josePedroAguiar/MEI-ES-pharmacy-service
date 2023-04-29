@@ -1,14 +1,29 @@
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
-    function handleLogin () {
+    const ColoredLine = ({ color }) => (
+        <hr
+            style={{
+                color: color,
+                height: 3
+            }}
+        />
+    );
+ 
+
+    const handleLogin = () =>  {
         console.log("login");
-        // console.log(email);
-        // console.log(password);
+        console.log(email);
+        console.log(password);
+        if(email === "email" && password === "password"){
+            navigate('/home');
+        }
         // fetch("/login", {
         //     method: "POST",
         //     body: JSON.stringify({ email, password }),
@@ -31,7 +46,7 @@ function LoginPage() {
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <div className="text-center lg:text-left">
-                    <h1 className="text-5xl font-bold">Login now!</h1>
+                    <h1 className="text-5xl font-bold">Modern Pharmacy Service!</h1>
                     <p className="py-6">Pharmacy Service</p>
                 </div>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
@@ -42,7 +57,7 @@ function LoginPage() {
                             </label>
                             <input
                                 type="text"
-                                placeholder="email"
+                                placeholder="Email"
                                 className="input input-bordered"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
@@ -50,11 +65,11 @@ function LoginPage() {
                         </div>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Passwsord</span>
+                                <span className="label-text">Password</span>
                             </label>
                             <input
                                 type="password"
-                                placeholder="password"
+                                placeholder="Password"
                                 className="input input-bordered"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
@@ -67,7 +82,9 @@ function LoginPage() {
                         </div>
                         <div className="form-control mt-6">
                             <button className="btn btn-primary" onClick={handleLogin}>
-                                Login
+                                <div style={{ fontSize: "16px" }}>
+                                    Log in
+                                </div>
                             </button>
                         </div>
                     </div>
