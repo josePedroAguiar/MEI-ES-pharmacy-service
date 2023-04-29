@@ -1,0 +1,2 @@
+# pharmacy-service-ES
+django
