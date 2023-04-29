@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pharmacy</title>
+</head>
+<body>
+{%  extends 'base.html'%}
+{% block  content %}
+    <div class="w3-center" style="margin-top: 10%">
+    <h1 style="font-size:164px;"> Pharmacy</h1>
+
+        {% if user.is_authenticated %}
+<form class="nav-item" action="{% url 'logout' %}" method="POST">
+                {% csrf_token %}
+                <button  type="submit" style="width: 25%;font-size: 20px">Logout</button>
+            </form>
+
+        {%  else %}
+            <form class="nav-item" action="{% url 'signup' %}">
+                <button  type="submit" style="width: 25%;height: 10%;font-size: 20px ">Sign in</button></form>
+            <br>
+            <form class="nav-item" action="{% url 'login' %}">
+                <button  type="submit" style="width: 25%;height: 10%;font-size: 20px">Login</button></form>
+
+            </ul>
+        {%  endif %}
+    </div>
+{% endblock %}
+</body>
+<style>
+    #brand
+    {
+
+
+        background-color: var(--txt);
+        color: var(--txt);
+    }
+    #brand:hover
+    {
+        background-color: var(--txt);
+        color: var(--txt);
+    }
+    .h1{
+        color: var(--txt);
+
+    }
+</style>
+</html>

@@ -1,0 +1,65 @@
+{%  extends 'base.html'%}
+
+
+<body>
+{% block  content %}
+    {% load static %}
+    <div id="login" class="card w3-center" style="background-color:transparent;border-color: #e3ae01;margin-left: 25%;margin-right:25%;margin-top:10%;">
+    {% if error %}
+    <div class="alert alert-danger" role="alert">
+        <h6>{{ error }}</h6></div>
+    {% endif %}
+        <h1>Login</h1>
+
+
+
+    <form method="POST">
+        <br>
+        {% csrf_token %}
+        <label for="fname">Username </label>
+        <input id="{{ form.username.id_for_label }}" name="{{ form.username.html_name }}" maxlength="30"  type="text" />
+        <br>
+            <label for="lname">Password </label>
+        <input  id="{{ form.password.id_for_label }}" name="{{ form.password.html_name }}"   type="password" />
+            <br>
+            <button class="btn btn-warning" type="submit" style="color: white;padding-right: 30px;padding-left: 30px"><b>Login</b></button>
+
+
+
+    </form>
+    </div>
+    <style>
+        label{
+            color: var(--txt);
+            margin-right: 20px;
+        }
+        input[type=text], select {
+            width: 40%;
+            padding: 12px 20px;
+            padding-left: 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type=password], select {
+            width: 40%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            padding-left: 20px;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+
+
+
+        #login{
+            border-radius: 5px;
+            padding: 20px;
+        }
+    </style>
+{% endblock %}
