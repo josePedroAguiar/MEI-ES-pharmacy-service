@@ -20,7 +20,7 @@ def signup(request):
                 user = User.objects.create_user(request.POST['username'], password=request.POST["password1"], )
                 user.save()
                 l(request,user)
-                return redirect('currentToDo')
+                return redirect('home')
             except IntegrityError:
                 return render(request, 'signup.html', {'form': UserCreationForm(),"error": 'Username already taken: Please Chose a different username '})
 
