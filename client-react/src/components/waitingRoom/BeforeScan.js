@@ -45,13 +45,17 @@ function BeforeScan(props) {
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col lg:flex-row">
         <button onClick={handleClick}>
-          <img src="../assets/qr_code.png" style={{ filter: "invert(100%) grayscale(100%)" }} className="max-w-sm rounded-lg shadow-2xl" />
+          <div className="avatar">
+            <div className="w-64 rounded-xl">
+            <img src="../assets/qr_code.png" style={{ filter: "invert(100%) grayscale(100%)" }} />
+            </div>
+          </div>
         </button>
         <div>
           <h1 className="text-5xl font-bold">Waiting for Scanner{dotsElement}</h1>
           <p className="py-6">Scan a costumer QR code to continue</p>
           {button ? (
-            <button className="btn btn-primary" onClick={props.handleScanner}>Continue</button>
+            <button className="btn btn-primary " onClick={props.handleScanner}>Continue</button>
           ) :
             (
               <button className="btn" disabled>Continue</button>
