@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import QRCodeScanner from "./BeforeScan";
 import { useNavigate } from 'react-router-dom';
 
 
