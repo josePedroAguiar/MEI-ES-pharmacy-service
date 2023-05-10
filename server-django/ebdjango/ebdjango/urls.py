@@ -15,17 +15,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 from pharmacyapps import views
 
 urlpatterns = [
-    path('', views.home, name="home"),
-    path("admin/", admin.site.urls),    
-    path('signup/', views.signup, name="signup"),
-    path('logout/', views.logout ,name="logout"),
-    path('login/', views.login ,name="login"),
+    #path('', views.home, name="home"),
+    path("admin/", admin.site.urls),   
+    path('', include('pharmacyapps.urls')),
+    path('', include('accounts.urls')), 
+    #path('signup/', views.signup, name="signup"),
+    #path('logout/', views.logout ,name="logout"),
+    #path('login/', views.login ,name="login"),
     ]
 """
 path("/scan", ),

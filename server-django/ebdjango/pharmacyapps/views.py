@@ -1,3 +1,4 @@
+'''
 from django.shortcuts import render,redirect ,get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.db import IntegrityError
@@ -79,4 +80,27 @@ def logout(request,current_user):
        if token:
             cache.set("access-token" + token, True, timeout=None)
     return JsonResponse({'message': 'Logged out successfully!'})
+# Create your views here.
+'''
+from django.shortcuts import render
+from django.http import HttpResponse
+from rest_framework import viewsets, permissions
+from pharmacyapps.models import medicamentos
+from .serializers import MedSerializer
+
+class MedView(viewsets.ModelViewSet):
+    
+    permission_classes = [
+        permissions.IsAuthenticated,
+    ]
+    serializer_class = MedSerializer
+
+    def get_queryset(self):
+        return self.request.user.medicamentos.all()
+    
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+
 # Create your views here.
