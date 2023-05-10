@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import NavBar from '../NavBar';
-import ScreenBeforeScan from "./BeforeScan"
-import ScreenAfterScan from "./AfterScan"
+import NavBar from '../../components/NavBar';
+import ScreenBeforeScan from "../../components/waitingRoom/BeforeScan"
+import ScreenAfterScan from "../../components/waitingRoom/AfterScan"
 
 function WaitingPage() {
   const [showScanner, setShowScanner] = useState(false);

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Routes, Route, useNavigate, BrowserRouter} from 'react-router-dom';
 import Login from './components/authentication/Login';
 import Home from './components/home/Home';
-import Waiting from './components/waitingRoom/WaitingPage';
+import Waiting from './pages/waitingRoom/WaitingPage';
 import NavBar from './components/NavBar';
 import ListDrugs from './components/prescription/ListDrugs';
 
