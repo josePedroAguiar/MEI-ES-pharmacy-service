@@ -95,7 +95,7 @@ WSGI_APPLICATION = "ebdjango.wsgi.application"
 
 DB_ENDPOINT= 'http://localhost:8000'
 DB_TABLE= "my-table"
-"""
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
@@ -113,8 +113,9 @@ DATABASES = {
         "PORT": 5432,
 
     }
-
+    
 }   
+"""
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
