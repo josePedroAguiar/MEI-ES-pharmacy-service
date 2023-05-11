@@ -1,18 +1,22 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 
 function AfterScan(props) {
     const [user, setUser] = useState(props.user);
-    const navigate = useNavigate();
 
+    const [shouldRedirect, setShouldRedirect] = useState(false);
 
 
     function handleContinue(){
-        navigate('/list');
-        
+        console.log("continue");
+        setShouldRedirect(true);
+    }
+    if(shouldRedirect){
+        return <Redirect to="/dash" />;
 
     }
+
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col lg:flex-row">

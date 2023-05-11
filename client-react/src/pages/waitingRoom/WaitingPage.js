@@ -26,7 +26,6 @@ function WaitingPage() {
   }
   return (
     <>
-      <NavBar fixed={true} userName="John Doe" />
 
       {showScanner ? (
         <ScreenAfterScan user={user} />

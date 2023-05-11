@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
-import { Redirect } from 'react-router-dom';
 
 
 function BeforeScan(props) {
-  const navigate = Redirect();
   const [qrCodeScanned, setQrCodeScanned] = useState(false);
   const [button, setButton] = useState(false);
 

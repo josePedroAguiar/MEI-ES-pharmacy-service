@@ -97,7 +97,7 @@ function ListDrugs(props) {
 
 
 
-  º  };
+    };
 
     const handleGenericChange = (drugId, newAmount) => {
         setSelectedAmounts({ ...selectedAmounts, [drugId]: newAmount });
@@ -105,7 +105,6 @@ function ListDrugs(props) {
 
     return (
         <>
-            <NavBar fixed={true} userName="John Doe" />
             <div className="grid gap-32 grid-cols-2  pt-16">
                 <div className="flex flex-col w-full lg:flex-row gap-64">
                     <div className="items-center">
@@ -136,7 +135,7 @@ function ListDrugs(props) {
                                                     <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
                                                         {drug.generics.map(generic => (
                                                             <li>
-                                                                    {generic.manufacturer} - ${generic.price.toFixed(2)}
+                                                                {generic.manufacturer} - ${generic.price.toFixed(2)}
                                                             </li>
                                                         ))
                                                         }
