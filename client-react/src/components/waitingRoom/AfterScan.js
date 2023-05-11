@@ -6,6 +6,17 @@ import { useNavigate } from 'react-router-dom';
 function AfterScan(props) {
     const [user, setUser] = useState(props.user);
 
+    const [shouldRedirect, setShouldRedirect] = useState(false);
+
+
+    function handleContinue(){
+        console.log("continue");
+        setShouldRedirect(true);
+    }
+    if(shouldRedirect){
+        return <Redirect to="/dash" />;
+
+    }
 
     return (
         <div className="hero min-h-screen bg-base-200">
