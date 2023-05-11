@@ -47,14 +47,8 @@ render() {
                           <PrivateRoute exact path="/" component={Waiting} />
                           <Route exact path="/register" component={Register} />
                           <Route exact path="/login" component={Login} />
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
                           <PrivateRoute exact path="/list" component={ListDrugs} />
->>>>>>> Stashed changes
-=======
-                          <Route exact path="/list" component={ListDrugs} />
->>>>>>> 5b4fd5466549879bd851f6a5387da41cd322c2af
+
                       </Switch> 
                   </div>
               </Fragment>

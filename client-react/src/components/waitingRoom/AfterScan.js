@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
-import { Redirect } from 'react-router-dom';
-
+import QRCodeScanner from "./BeforeScan";
+import { useNavigate } from 'react-router-dom';
+import ListDrugs from "../prescription/ListDrugs";
+import { Redirect } from "react-router-dom";
 
 function AfterScan(props) {
     const [user, setUser] = useState(props.user);
@@ -13,7 +15,7 @@ function AfterScan(props) {
         setShouldRedirect(true);
     }
     if(shouldRedirect){
-        return <Redirect to="/dash" />;
+        return <Redirect to="/list" />;
 
     }
 
