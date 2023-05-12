@@ -135,3 +135,11 @@ GitHub.sublime-settings
 !.vscode/launch.json 
 !.vscode/extensions.json 
 .history
+
+# Created by https://www.toptal.com/developers/gitignore/api/elasticbeanstalk
+# Edit at https://www.toptal.com/developers/gitignore?templates=elasticbeanstalk
+
+### ElasticBeanstalk ###
+.elasticbeanstalk/
+
+# End of https://www.toptal.com/developers/gitignore/api/elasticbeanstalk
