@@ -2,6 +2,8 @@ import { useState } from "react";
 import NavBar from '../NavBar';
 
 function ListDrugs(props) {
+
+    const [total, setTotal] = useState(0);
     const [user, setUser] = useState(props.user);
     const [prescribed_drugs, setDrugs] = useState([
         {
@@ -40,17 +42,24 @@ function ListDrugs(props) {
     const [selectedDrugs, setSelectedDrugs] = useState([]);
     const [selectedAmounts, setSelectedAmounts] = useState({});
 
+   
 
     const addToSelectedDrugs = (drug, availableAmount, original) => {
+        
         var changeAmount = availableAmount || original;
         setDrugs(prescribed_drugs.map((d) => {
             if (d.id === drug.id) {
                 d.selectedAmount = Number(d.selectedAmount) + Number(changeAmount);
                 d.availableAmount = Number(d.availableAmount) - Number(changeAmount);
                 setSelectedAmounts({ ...selectedAmounts, [d.id]: d.availableAmount });
+            
             }
+            
             return d;
         }));
+       
+        //update the final price
+        setTotal(total =>  total + drug.price * changeAmount);
 
         const drugAlreadySelected = selectedDrugs.some((d) => d.id === drug.id);
         if (drugAlreadySelected) {
@@ -60,22 +69,31 @@ function ListDrugs(props) {
                 }
                 return d;
             }));
+           
+                
+            
         } else {
             setSelectedDrugs([...selectedDrugs, { ...drug, availableAmount: changeAmount }]);
+
+            
+            
         }
     };
 
 
     const removeFromSelectedDrugs = (drug) => {
+        
         var selectedAmount;
         selectedDrugs.map((d) => {
             if (d.id === drug.id) {
                 selectedAmount = d.selectedAmount;
             }
+            
             return d;
         });
 
-
+        //update the final price
+        setTotal(total =>  total - drug.price * drug.selectedAmount);
         setDrugs(prescribed_drugs.map((d) => {
             if (d.id === drug.id) {
                 d.availableAmount = d.availableAmount + selectedAmount;//
@@ -86,6 +104,9 @@ function ListDrugs(props) {
         }));
 
         setSelectedDrugs(selectedDrugs.filter((d) => d.id !== drug.id));
+        
+    
+        
     };
 
 
@@ -99,21 +120,40 @@ function ListDrugs(props) {
 
     };
 
-    const handleGenericChange = (drugId, newAmount) => {
-        setSelectedAmounts({ ...selectedAmounts, [drugId]: newAmount });
-    };
+    const handleGenericChange = (drugId, genericIndex) => {
+        const selectedDrug = prescribed_drugs.find((drug) => drug.id === drugId);
+        const selectedGeneric = selectedDrug.generics[genericIndex];
+        const updatedDrug = {
+          ...selectedDrug,
+          name: selectedGeneric.name,
+          manufacturer: selectedGeneric.manufacturer,
+          price: selectedGeneric.price,
+          generics: [selectedDrug, ...selectedDrug.generics.slice(0, genericIndex), ...selectedDrug.generics.slice(genericIndex + 1)]   
+        };
+        
+        const updatedPrescribedDrugs = prescribed_drugs.map((drug) =>
+          drug.id === drugId ? updatedDrug : drug 
+          
+        );
+        
+        setDrugs(updatedPrescribedDrugs);
+       
+      };
+
+   
 
     return (
-        <>
+        
+        <><div className="card card-body ">
             <div className="grid gap-32 grid-cols-2  pt-16">
                 <div className="flex flex-col w-full lg:flex-row gap-64">
                     <div className="items-center">
-                        <h2 className="text-2xl font-bold">List of prescribed_drugs</h2>
+                        <h2 className="text-4xl font-bold">List of prescribed_drugs</h2>
                         <ul className="menu bg-base-100 w-56 p-2 rounded-box">
                             {prescribed_drugs.map((drug) => (
                                 <li key={drug.id}>
                                     <div className="flex">
-                                        <a onClick={() => addToSelectedDrugs(drug, selectedAmounts[drug.id], drug.availableAmount)}>
+                                        <a>
                                             {drug.name} ({drug.manufacturer}) - ${drug.price.toFixed(2)}
                                         </a>
                                         <div className="flex items-center ml-2">
@@ -132,10 +172,12 @@ function ListDrugs(props) {
                                                     <label tabIndex={0} className="btn m-1">
                                                         generic
                                                     </label>
-                                                    <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-                                                        {drug.generics.map(generic => (
-                                                            <li>
+                                                    <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52" >
+                                                        {drug.generics.map((generic, index) => (
+                                                            <li key={index}>
+                                                                <a onClick={() => handleGenericChange(drug.id, index)}>
                                                                 {generic.manufacturer} - ${generic.price.toFixed(2)}
+                                                                </a>
                                                             </li>
                                                         ))
                                                         }
@@ -145,7 +187,10 @@ function ListDrugs(props) {
                                                 <button className="btn m-1" disabled>
                                                     generic
                                                 </button>
+                                                
                                             )}
+                                            <button className="btn btn-primary" onClick={() => addToSelectedDrugs(drug, selectedAmounts[drug.id], drug.availableAmount)}>
+                                             Add </button>
                                         </div>
                                     </div>
                                 </li>
@@ -158,20 +203,28 @@ function ListDrugs(props) {
                     </div>
 
                     <div>
-                        <h2 className="text-2xl font-bold">Selected prescribed_drugs</h2>
+                        <h2 className="text-4xl font-bold">Selected prescribed_drugs</h2>
                         <ul className="menu bg-base-100 w-56 p-2 rounded-box">
                             {selectedDrugs.map((drug) => (
                                 <li key={drug.id}>
-                                    <a onClick={() => removeFromSelectedDrugs(drug)}>
+                                    <a >
                                         {drug.name} ({drug.manufacturer}) - ${drug.price.toFixed(2)} {drug.selectedAmount}
+                                        <button className="btn btn-secondary" onClick={() => removeFromSelectedDrugs(drug) }> Remove</button>
                                     </a>
+                                    
                                 </li>
+                                
                             ))}
+                            <h2 className="text-2xl font-bold">
+                                Price:  {total} €  <button className="btn btn-accent">Checkout</button>
+                                
+                            </h2>
+                            
                         </ul>
                     </div>
                 </div>
             </div>
-
+            </div>              
         </>
     );
 }
