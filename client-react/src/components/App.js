@@ -47,7 +47,8 @@ render() {
                           <PrivateRoute exact path="/" component={Waiting} />
                           <Route exact path="/register" component={Register} />
                           <Route exact path="/login" component={Login} />
-                          <Route exact path="/list" component={ListDrugs} />
+                          <PrivateRoute exact path="/list" component={ListDrugs} />
+
                       </Switch> 
                   </div>
               </Fragment>
