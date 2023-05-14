@@ -1,5 +1,6 @@
 import { useState } from "react";
 import NavBar from '../NavBar';
+//import QRCode from "qrcode";
 
 function ListDrugs(props) {
 
@@ -38,6 +39,16 @@ function ListDrugs(props) {
             ]
         },
     ]);
+    
+/*
+    const drugsString = JSON.stringify(prescribed_drugs);
+
+    QRCode.toCanvas(drugsString, function (error, canvas) {
+        if (error) return console.log("Error generating QR code:", error);
+      
+        // `canvas` is the generated QR code image
+        console.log(canvas);
+      });*/
 
     const [selectedDrugs, setSelectedDrugs] = useState([]);
     const [selectedAmounts, setSelectedAmounts] = useState({});
