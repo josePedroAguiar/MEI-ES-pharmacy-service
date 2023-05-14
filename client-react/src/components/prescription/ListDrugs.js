@@ -1,5 +1,6 @@
 import { useState } from "react";
 import NavBar from '../NavBar';
+//ola
 //import QRCode from "qrcode";
 
 function ListDrugs(props) {
