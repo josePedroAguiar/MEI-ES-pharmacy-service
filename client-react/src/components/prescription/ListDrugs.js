@@ -11,34 +11,34 @@ function ListDrugs(props) {
     const [user, setUser] = useState(props.user);
     const [prescribed_drugs, setDrugs] = useState([
         {
-            id: 1, name: "Drug 1", manufacturer: "Manufacturer 1", price: 5.0, availableAmount: 3, selectedAmount: 0, canBeChanged: true, generics: [
-                { id: 1, name: "Drug 2", manufacturer: "Manufacturer 2", price: 20.0 },
-                { id: 2, name: "Drug 3", manufacturer: "Manufacturer 3", price: 20.0 },
+            id: 1, name: "Brufen", manufacturer: "Manufacturer 1", price: 5.0, availableAmount: 3, selectedAmount: 0,  canBeChanged: true, generics: [
+                { id: 2, name: "Drug Z", manufacturer: "Manufacturer 1", price: 20.0, selectedAmount: 0, },
+                { id: 3, name: "Drug X", manufacturer: "Manufacturer 1", price: 20.0, selectedAmount: 0 },
             ]
         },
         {
-            id: 2, name: "Drug 2", manufacturer: "Manufacturer 2", price: 20.0, availableAmount: 3, selectedAmount: 0, canBeChanged: false, generics: [
+            id: 4, name: "Benuron", manufacturer: "Manufacturer 2", price: 20.0, availableAmount: 3, selectedAmount: 0, canBeChanged: false, generics: [
 
-                { id: 3, name: "Drug 2", manufacturer: "Manufacturer 2", price: 20.0 },
-                { id: 4, name: "Drug 3", manufacturer: "Manufacturer 3", price: 20.0 },
+                { id: 5, name: "Drug A", manufacturer: "Manufacturer 2", price: 20.0,  selectedAmount: 0 },
+                { id: 6, name: "Drug B", manufacturer: "Manufacturer 2", price: 20.0,  selectedAmount: 0 },
             ]
         },
         {
-            id: 3, name: "Drug 3", manufacturer: "Manufacturer 3", price: 30.0, availableAmount: 3, selectedAmount: 0, canBeChanged: true, generics: [
-                { id: 5, name: "Drug 2", manufacturer: "Manufacturer 2", price: 20.0 },
-                { id: 6, name: "Drug 3", manufacturer: "Manufacturer 3", price: 20.0 },
+            id: 7, name: "Victan", manufacturer: "Manufacturer 3", price: 30.0, availableAmount: 3, selectedAmount: 0, canBeChanged: true, generics: [
+                { id: 8, name: "Drug C", manufacturer: "Manufacturer 3", price: 20.0,  selectedAmount: 0 },
+                { id: 9, name: "Drug P", manufacturer: "Manufacturer 3", price: 20.0,  selectedAmount: 0 },
             ]
         },
         {
-            id: 4, name: "Drug 4", manufacturer: "Manufacturer 4", price: 40.0, availableAmount: 3, selectedAmount: 0, canBeChanged: true, generics: [
-                { id: 7, name: "Drug 2", manufacturer: "Manufacturer 2", price: 20.0 },
-                { id: 8, name: "Drug 3", manufacturer: "Manufacturer 3", price: 20.0 },
+            id: 10, name: "Ilvico", manufacturer: "Manufacturer 4", price: 40.0, availableAmount: 3, selectedAmount: 0, canBeChanged: true, generics: [
+                { id: 11, name: "Drug D", manufacturer: "Manufacturer 4", price: 20.0,  selectedAmount: 0 },
+                { id: 12, name: "Drug E", manufacturer: "Manufacturer 4", price: 20.0,  selectedAmount: 0 },
             ]
         },
         {
-            id: 5, name: "Drug 5", manufacturer: "Manufacturer 5", price: 50.0, availableAmount: 5, selectedAmount: 0, canBeChanged: true, generics: [
-                { id: 9, name: "Drug 2", manufacturer: "Manufacturer 2", price: 20.0 },
-                { id: 10, name: "Drug 3", manufacturer: "Manufacturer 3", price: 20.0 },
+            id: 13, name: "Sinutab", manufacturer: "Manufacturer 5", price: 50.0, availableAmount: 5, selectedAmount: 0, canBeChanged: true, generics: [
+                { id: 14, name: "Drug F", manufacturer: "Manufacturer 5", price: 20.0,  selectedAmount: 0 },
+                { id: 15, name: "Drug G", manufacturer: "Manufacturer 5", price: 20.0,  selectedAmount: 0 },
             ]
         },
     ]);
@@ -61,7 +61,7 @@ function ListDrugs(props) {
     const addToSelectedDrugs = (drug, availableAmount, original) => {
         if(drug.availableAmount>0){
             dispatch(createMessage({Add_medicamento:'Drug Added'}));
-        }
+        
         
        
         
@@ -97,6 +97,7 @@ function ListDrugs(props) {
             
             
         }
+        }
     };
 
 
@@ -106,6 +107,7 @@ function ListDrugs(props) {
         selectedDrugs.map((d) => {
             if (d.id === drug.id) {
                 selectedAmount = d.selectedAmount;
+                
             }
             
             return d;
@@ -114,17 +116,21 @@ function ListDrugs(props) {
         //update the final price
         setTotal(total =>  total - drug.price * drug.selectedAmount);
         setDrugs(prescribed_drugs.map((d) => {
-            if (d.id === drug.id) {
+            if (d.manufacturer === drug.manufacturer) {
                 d.availableAmount = d.availableAmount + selectedAmount;//
+                //drug.selectedAmount=0;
                 d.selectedAmount = 0;
+                
                 setSelectedAmounts({ ...selectedAmounts, [d.id]: d.availableAmount });
             }
+
+            
             return d;
         }));
 
         setSelectedDrugs(selectedDrugs.filter((d) => d.id !== drug.id));
         
-    
+       
         
     };
 
@@ -142,13 +148,18 @@ function ListDrugs(props) {
     const handleGenericChange = (drugId, genericIndex) => {
         const selectedDrug = prescribed_drugs.find((drug) => drug.id === drugId);
         const selectedGeneric = selectedDrug.generics[genericIndex];
+        selectedAmounts[selectedDrug.id]= selectedAmounts[selectedGeneric.id];
         const updatedDrug = {
           ...selectedDrug,
+          id: selectedGeneric.id,
           name: selectedGeneric.name,
           manufacturer: selectedGeneric.manufacturer,
           price: selectedGeneric.price,
+          selectedAmount: selectedGeneric.selectedAmount,
           generics: [selectedDrug, ...selectedDrug.generics.slice(0, genericIndex), ...selectedDrug.generics.slice(genericIndex + 1)]   
         };
+
+        
         
         const updatedPrescribedDrugs = prescribed_drugs.map((drug) =>
           drug.id === drugId ? updatedDrug : drug 
@@ -196,7 +207,7 @@ function ListDrugs(props) {
                                                         {drug.generics.map((generic, index) => (
                                                             <li key={index}>
                                                                 <a onClick={() => handleGenericChange(drug.id, index)}>
-                                                                {generic.manufacturer} - ${generic.price.toFixed(2)}
+                                                                {generic.name} - ${generic.price.toFixed(2)}
                                                                 </a>
                                                             </li>
                                                         ))
