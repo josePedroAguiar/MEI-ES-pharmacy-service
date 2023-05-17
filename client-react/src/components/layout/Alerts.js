@@ -39,6 +39,27 @@ export class Alerts extends Component {
           if(message.Add_medicamento){
             alert.success(message.Add_medicamento);
           }
+
+        if(message !== prevProps.message){
+          if(message.Change_medicamento){
+            alert.success(message.Change_medicamento);
+          }
+        } 
+        if(message !== prevProps.message){
+          if(message.Login_Success){
+            alert.success(message.Login_Success);
+          }
+        }
+        if(message !== prevProps.message){
+          if(message.Register_Success){
+            alert.success(message.Register_Success);
+          }
+        }
+        if(message !== prevProps.message){
+          if(message.Logout_Success){
+            alert.success(message.Logout_Success);
+          }
+        }
           
         if (message.passwordNotMatch) {
           alert.error(message.passwordNotMatch);
