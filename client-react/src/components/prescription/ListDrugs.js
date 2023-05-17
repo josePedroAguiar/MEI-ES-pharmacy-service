@@ -1,6 +1,8 @@
 import { useState } from "react";
 import NavBar from '../NavBar';
-//ola
+import Alerts from "../layout/Alerts";
+import { createMessage } from "../../actions/messages";
+import { useDispatch } from 'react-redux';
 //import QRCode from "qrcode";
 
 function ListDrugs(props) {
@@ -54,9 +56,14 @@ function ListDrugs(props) {
     const [selectedDrugs, setSelectedDrugs] = useState([]);
     const [selectedAmounts, setSelectedAmounts] = useState({});
 
-   
+    const dispatch = useDispatch();
 
     const addToSelectedDrugs = (drug, availableAmount, original) => {
+        if(drug.availableAmount>0){
+            dispatch(createMessage({Add_medicamento:'Drug Added'}));
+        }
+        
+       
         
         var changeAmount = availableAmount || original;
         setDrugs(prescribed_drugs.map((d) => {
@@ -78,6 +85,7 @@ function ListDrugs(props) {
             setSelectedDrugs(selectedDrugs.map((d) => {
                 if (d.id === drug.id) {
                     d.selectedAmount = Number(d.selectedAmount) + Number(changeAmount);
+                    
                 }
                 return d;
             }));
@@ -86,7 +94,6 @@ function ListDrugs(props) {
             
         } else {
             setSelectedDrugs([...selectedDrugs, { ...drug, availableAmount: changeAmount }]);
-
             
             
         }
@@ -94,7 +101,7 @@ function ListDrugs(props) {
 
 
     const removeFromSelectedDrugs = (drug) => {
-        
+        dispatch(createMessage({Delete_medicamento: "Drug Removed"}))
         var selectedAmount;
         selectedDrugs.map((d) => {
             if (d.id === drug.id) {
@@ -149,6 +156,7 @@ function ListDrugs(props) {
         );
         
         setDrugs(updatedPrescribedDrugs);
+        dispatch(createMessage({Change_medicamento: "Drug Changed"}))
        
       };
 

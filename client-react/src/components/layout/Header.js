@@ -17,10 +17,12 @@ export class Header extends Component {
 
     const authLinks = (
       <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
+         <li className="nav-item font-bold text-3xl" style={{ display: 'inline-block', marginRight: '50px'  }}>
         <span className="navbar-text mr-3">
-          <strong>{user ? `Welcome ${user.username}` : ''}</strong>
+          <strong>{user ? `Welcome ${user.username}!!` : ''}</strong>
         </span>
-        <li className="nav-item">
+        </li>
+        <li className="nav-item" style={{ display: 'inline-block' }}>
           <button className="btn btn-primary" onClick={this.props.logout} >
             Logout
           </button>
@@ -30,17 +32,17 @@ export class Header extends Component {
 
     const guestLinks = (
       <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
-        <li className="nav-item">
-          <Link to="/register" className="nav-link">
-            Register
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link to="/login" className="nav-link">
-            Login
-          </Link>
-        </li>
-      </ul>
+      <li className="nav-item font-bold text-2xl" style={{ display: 'inline-block', marginRight: '30px'  }}>
+        <Link to="/register" className="nav-link">
+          Register
+        </Link>
+      </li>
+      <li className="nav-item font-bold text-2xl" style={{ display: 'inline-block' }}>
+        <Link to="/login" className="nav-link">
+          Login
+        </Link>
+      </li>
+    </ul>
     );
 
     return (
@@ -51,7 +53,7 @@ export class Header extends Component {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-            <a className="navbar-brand py-3 text-5xl font-bold" href="#">Farmácia</a>
+            <a className="navbar-brand py-4 text-5xl font-bold" href="#"style={{ textAlign: 'right' }}>Modern Pharmacy</a>
             
           </div>
           {isAuthenticated ? authLinks : guestLinks}
