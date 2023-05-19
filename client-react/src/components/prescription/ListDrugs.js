@@ -1,57 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NavBar from '../NavBar';
 import Alerts from "../layout/Alerts";
 import { createMessage } from "../../actions/messages";
 import { useDispatch } from 'react-redux';
+import prescriptionsData from "../../Prescriptions.json";
+import { useLocation } from 'react-router-dom';
 //import QRCode from "qrcode";
 
-function ListDrugs(props) {
-
+function ListDrugs() {
+    const location = useLocation();
     const [total, setTotal] = useState(0);
-    const [user, setUser] = useState(props.user);
-    const [prescribed_drugs, setDrugs] = useState([
-        {
-            id: 1, name: "Brufen", manufacturer: "Manufacturer 1", price: 5.0, availableAmount: 3, selectedAmount: 0,  canBeChanged: true, generics: [
-                { id: 2, name: "Drug Z", manufacturer: "Manufacturer 1", price: 20.0, selectedAmount: 0, },
-                { id: 3, name: "Drug X", manufacturer: "Manufacturer 1", price: 20.0, selectedAmount: 0 },
-            ]
-        },
-        {
-            id: 4, name: "Benuron", manufacturer: "Manufacturer 2", price: 20.0, availableAmount: 3, selectedAmount: 0, canBeChanged: false, generics: [
+    const [prescribed_drugs, setDrugs] = useState([]);
 
-                { id: 5, name: "Drug A", manufacturer: "Manufacturer 2", price: 20.0,  selectedAmount: 0 },
-                { id: 6, name: "Drug B", manufacturer: "Manufacturer 2", price: 20.0,  selectedAmount: 0 },
-            ]
-        },
-        {
-            id: 7, name: "Victan", manufacturer: "Manufacturer 3", price: 30.0, availableAmount: 3, selectedAmount: 0, canBeChanged: true, generics: [
-                { id: 8, name: "Drug C", manufacturer: "Manufacturer 3", price: 20.0,  selectedAmount: 0 },
-                { id: 9, name: "Drug P", manufacturer: "Manufacturer 3", price: 20.0,  selectedAmount: 0 },
-            ]
-        },
-        {
-            id: 10, name: "Ilvico", manufacturer: "Manufacturer 4", price: 40.0, availableAmount: 3, selectedAmount: 0, canBeChanged: true, generics: [
-                { id: 11, name: "Drug D", manufacturer: "Manufacturer 4", price: 20.0,  selectedAmount: 0 },
-                { id: 12, name: "Drug E", manufacturer: "Manufacturer 4", price: 20.0,  selectedAmount: 0 },
-            ]
-        },
-        {
-            id: 13, name: "Sinutab", manufacturer: "Manufacturer 5", price: 50.0, availableAmount: 5, selectedAmount: 0, canBeChanged: true, generics: [
-                { id: 14, name: "Drug F", manufacturer: "Manufacturer 5", price: 20.0,  selectedAmount: 0 },
-                { id: 15, name: "Drug G", manufacturer: "Manufacturer 5", price: 20.0,  selectedAmount: 0 },
-            ]
-        },
-    ]);
-    
-/*
-    const drugsString = JSON.stringify(prescribed_drugs);
+    useEffect(() => {
+        const userPrescriptions = prescriptionsData.users.find(user => user.user_id === location.state.user.user_id);
+        if (userPrescriptions) {
+          setDrugs(userPrescriptions.prescriptions);
+        } else {
+          setDrugs([]);
+        }
+      }, [location.state.user.user_id]);
 
-    QRCode.toCanvas(drugsString, function (error, canvas) {
-        if (error) return console.log("Error generating QR code:", error);
-      
-        // `canvas` is the generated QR code image
-        console.log(canvas);
-      });*/
 
     const [selectedDrugs, setSelectedDrugs] = useState([]);
     const [selectedAmounts, setSelectedAmounts] = useState({});

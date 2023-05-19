@@ -3,26 +3,36 @@ import NavBar from '../../components/NavBar';
 import ScreenBeforeScan from "../../components/waitingRoom/BeforeScan"
 import ScreenAfterScan from "../../components/waitingRoom/AfterScan"
 
+
 function WaitingPage() {
   const [showScanner, setShowScanner] = useState(false);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState([]);
+ 
+ 
 
   const handleScanSuccess = () => {
     setShowScanner(false);
   }
+  
 
-  const handleScanner = () => {
-    console.log("populated");
-    populateDefaultUser();
+  const handleScanner = (selectedUser) => {
+    //console.log(selectedUser);
+    //populateDefaultUser(user);
+    
+   
+    setUser(selectedUser);
+    
     setShowScanner(true);
+    
   };
-  const populateDefaultUser = () => {
-    const user = {
-      id: 1,
-      username: "Joaquim da Silva",
-      avatar: "../assets/default_persona.jpg"
-    };
-    setUser(user);
+
+  useEffect(()=>{
+    //console.log(user);
+  })
+  const populateDefaultUser = (user) => {
+  
+        setUser(user);
+     
   }
   return (
     <>
