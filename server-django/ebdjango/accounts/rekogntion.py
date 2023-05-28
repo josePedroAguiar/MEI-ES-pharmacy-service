@@ -18,10 +18,11 @@ def lambda_handler(event, context):
 
 
 def compare_faces(sourceFile, targetFile):
+    #imageTarget = open(targetFile, 'rb')
     response = client.compare_faces(
         SimilarityThreshold=80,
         SourceImage={'S3Object': {'Bucket': bucket, 'Name': sourceFile}},
-        TargetImage={'S3Object': {'Bucket': bucket, 'Name': targetFile}}
+        TargetImage={'Bytes': targetFile.read()}
     )
 
     for faceMatch in response['FaceMatches']:

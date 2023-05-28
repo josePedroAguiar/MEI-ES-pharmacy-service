@@ -103,17 +103,12 @@ class LoginView(generics.GenericAPIView):
 class RekoView(generics.GenericAPIView):
     #permission_classes = [permissions.IsAuthenticated,]
     serializer_class = UserSerializer
-    def list(self, request):
-        return Response("GET API")
-
-    def create(self, request):
-        file_uploaded = request.FILES.get('file_uploaded')
-        content_type = file_uploaded.content_type
-        response = "POST API and you have uploaded a {} file".format(content_type)
-        return Response(response)
+   
+       
 
     def post(self,request):
-        return JsonResponse({"resp:" : rekogntion("IMG_0358.jpeg","IMG_0673.jpeg")})
+        file_uploaded = request.FILES.get('file_uploaded')
+        return JsonResponse({"resp:" : rekogntion("IMG_0358.jpeg",file_uploaded)})
   
     
 
