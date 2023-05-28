@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-@o2@0-f6kj1wbl#o=)2*l#n79#xuogd03)jt9h((@axg6yv26o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['es-django.eba-am3xj2mi.us-east-1.elasticbeanstalk.com','127.0.0.1']
+ALLOWED_HOSTS = ['es-django-env.eba-bpqhs6uc.us-east-1.elasticbeanstalk.com','127.0.0.1']
 
 
 # Application definition
@@ -93,8 +93,7 @@ WSGI_APPLICATION = "ebdjango.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 
-DB_ENDPOINT= 'http://localhost:8000'
-DB_TABLE= "my-table"
+
 
 DATABASES = {
     "default": {
@@ -102,6 +101,10 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+"""
+DB_ENDPOINT= 'http://localhost:8000'
+DB_TABLE= "my-table"
+"""
 """
 DATABASES = {
      "default": {

@@ -80,7 +80,7 @@ from django.core.exceptions import ValidationError
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'last_login', 'is_staff', 'is_active', 'image_url')
+        fields = ('id', 'username', 'email', 'last_login', 'is_staff', 'is_active')
         
 class RegisterSerializer(serializers.ModelSerializer):
     email = serializers.CharField(write_only=True)
