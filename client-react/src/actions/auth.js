@@ -70,7 +70,7 @@ export const loadUser = () => (dispatch,getState) => {
     const body = JSON.stringify({ username, password });
   
     axios
-      .post('http://es-django-env.eba-bpqhs6uc.us-east-1.elasticbeanstalk.com//auth/login/', body, config)
+      .post('http://es-django-env.eba-bpqhs6uc.us-east-1.elasticbeanstalk.com/auth/login/', body, config)
       .then((res) => {
         dispatch({
           type: LOGIN_SUCCESS,
