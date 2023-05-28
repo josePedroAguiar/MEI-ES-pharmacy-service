@@ -1,6 +1,15 @@
 from rest_framework import serializers
+
 #from django.contrib.auth.models import User
 from pharmacyapps.models import User
+from rest_framework.serializers import Serializer, FileField
+
+# Serializers define the API representation.
+class UploadSerializer(Serializer):
+    file_uploaded = FileField()
+    class Meta:
+        fields = ['file_uploaded']
+
 #from .models import User
 
 '''
@@ -71,7 +80,7 @@ from django.core.exceptions import ValidationError
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'last_login', 'is_staff', 'is_active')
+        fields = ('id', 'username', 'email', 'last_login', 'is_staff', 'is_active', 'image_url')
         
 class RegisterSerializer(serializers.ModelSerializer):
     email = serializers.CharField(write_only=True)
