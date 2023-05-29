@@ -3,16 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@aws-sdk/client-sfn": "^3.341.0",
     "@lostinbrittany/jsqrcode": "^2.0.0",
     "@reduxjs/toolkit": "^1.9.5",
     "@tailwindcss/typography": "^0.5.9",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.5.0",
+    "assert": "^2.0.0",
+    "aws-sdk": "^2.622.0",
     "axios": "^1.4.0",
     "daisyui": "^2.51.5",
+    "history": "^5.3.0",
     "js-cookie": "^3.0.5",
     "jsqr": "^1.4.0",
+    "path-browserify": "^1.0.1",
     "prop-types": "^15.8.1",
     "qrcode": "^1.5.3",
     "qrcode-decoder": "^0.3.3",
@@ -35,7 +40,9 @@
     "redux": "^4.2.1",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.2",
-    "web-vitals": "^2.1.4"
+    "util": "^0.12.5",
+    "web-vitals": "^2.1.4",
+    "websocket": "^1.0.34"
   },
   "overrides": {
     "react-qr-reader": {
@@ -45,7 +52,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts --config-overrides ./config-overrides.js build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

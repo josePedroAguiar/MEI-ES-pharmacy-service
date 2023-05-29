@@ -20,6 +20,8 @@ from django.conf.urls.static import static
 from django.conf import settings
 from pharmacyapps import views
 
+
+
 urlpatterns = [
     #path('', views.home, name="home"),
     path("admin/", admin.site.urls),   

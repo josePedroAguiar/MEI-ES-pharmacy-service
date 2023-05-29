@@ -182,8 +182,9 @@ class User(AbstractBaseUser):
 # Create your models here.
 class medicamentos(models.Model):
     name = models.CharField(max_length=100)
-    type = models.BigIntegerField()
-    user = models.ForeignKey('pharmacyapps.User', related_name="medicamentos", on_delete=models.CASCADE, null=True)
+    manufacturer = models.CharField(max_length=100, null=True)
+    price = models.FloatField(max_length=100, null=True)
+    selectedAmount = models.IntegerField(null=True)
 '''
 class receitas(models.Model):
     id = models.IntegerField(max_length=100, primary_key=True)

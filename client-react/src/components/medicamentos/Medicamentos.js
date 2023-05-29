@@ -15,6 +15,7 @@ export class Medicamentos extends Component {
         this.props.getMeds();
     }
 
+
   render() {
     return (
       <Fragment>
@@ -34,7 +35,9 @@ export class Medicamentos extends Component {
               <tr key={medicamento.id}>
                 <td>{medicamento.id}</td>
                 <td>{medicamento.name}</td>
-                <td>{medicamento.type}</td>
+                <td>{medicamento.manufacturer}</td>
+                <td>{medicamento.price}</td>
+                <td>{medicamento.selectedAmount}</td>
                 <td><button className="btn btn-outline btn-error" onClick={this.props.deleteMeds.bind(this, medicamento.id)} >
                   Delete</button></td>
               </tr>

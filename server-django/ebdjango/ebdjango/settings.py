@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['es-django-env.eba-bpqhs6uc.us-east-1.elasticbeanstalk.com','12
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework_jwt',
     'rest_framework_simplejwt',
     'corsheaders',
+    
 ]
 
 REST_FRAMEWORK = {
@@ -54,16 +56,18 @@ REST_FRAMEWORK = {
   
 }
 
+
+
 MIDDLEWARE = [
-    "django.middleware.security.SecurityMiddleware",
     "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-   
+    
 ]
 
 ROOT_URLCONF = "ebdjango.urls"
@@ -87,8 +91,14 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "ebdjango.wsgi.application"
+ASGI_APPLICATION = "ebdjango.asgi.application"
 
 
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -159,7 +169,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-
+AWS_REGION = 'us-east-1'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 

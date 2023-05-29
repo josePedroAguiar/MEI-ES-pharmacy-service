@@ -5,12 +5,13 @@ import { createMessage , returnErrors } from './messages';
 
 //GET_MEDS
 
-export const getMeds = () => (dispatch,getState) =>{
+export const getMeds = () => (dispatch) =>{
 
    
 
     axios
-        .get("http://es-django-env.eba-bpqhs6uc.us-east-1.elasticbeanstalk.com/medicamentos/", tokenConfig(getState))
+        .get("http://es-django-env.eba-bpqhs6uc.us-east-1.elasticbeanstalk.com/medicamentos/")
+
         .then(res => {
             dispatch({
                 type: GET_MEDS,
@@ -21,12 +22,12 @@ export const getMeds = () => (dispatch,getState) =>{
 };
 
 // DELETE MEDS
-export const deleteMeds = (id) => (dispatch,getState) => {
+export const deleteMeds = (id) => (dispatch) => {
 
 
 
     axios
-      .delete(`http://es-django-env.eba-bpqhs6uc.us-east-1.elasticbeanstalk.com/medicamentos/${id}/`, tokenConfig(getState))
+      .delete(`http://es-django-env.eba-bpqhs6uc.us-east-1.elasticbeanstalk.com/medicamentos/${id}/`)
       .then((res) => {
         dispatch(createMessage({Delete_medicamento: "Medicamento Eliminado"}))
         dispatch({

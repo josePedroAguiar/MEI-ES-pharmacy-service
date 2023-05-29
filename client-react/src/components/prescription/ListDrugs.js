@@ -2,15 +2,21 @@ import { useState, useEffect } from "react";
 import NavBar from '../NavBar';
 import Alerts from "../layout/Alerts";
 import { createMessage } from "../../actions/messages";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector  } from 'react-redux';
 import prescriptionsData from "../../Prescriptions.json";
-import { useLocation } from 'react-router-dom';
+import { useLocation , Redirect} from 'react-router-dom';
+import { getMeds , deleteMeds } from '../../actions/medicamentos';
+import axios from 'axios';
 //import QRCode from "qrcode";
+
+
 
 function ListDrugs() {
     const location = useLocation();
     const [total, setTotal] = useState(0);
     const [prescribed_drugs, setDrugs] = useState([]);
+    const [drugs, setPharmDrugs] = useState([]);
+    const [shouldRedirect, setShouldRedirect] = useState(false);
 
     useEffect(() => {
         const userPrescriptions = prescriptionsData.users.find(user => user.user_id === location.state.user.user_id);
@@ -22,10 +28,41 @@ function ListDrugs() {
       }, [location.state.user.user_id]);
 
 
+      
+        const dispatch = useDispatch();
+
+        
+        useEffect(() => {
+            axios.get("http://127.0.0.1:8000/medicamentos/")
+              .then((res) => {
+                setPharmDrugs(res.data);
+                console.log(res.data);
+              });
+          }, []);
+        
+
+        useEffect(() => {
+        setDrugs((prescribed_drugs) => {
+            return prescribed_drugs.map((prescribedDrug) => {
+              const manufacturerDrugs = drugs.filter(
+                (drug) => drug.manufacturer === prescribedDrug.manufacturer
+              );
+              const updatedPrescribedDrug = {
+                ...prescribedDrug,
+                generics: [...manufacturerDrugs],
+              };
+              return updatedPrescribedDrug;
+            });
+          });
+        }, [drugs]);
+
+
+
+
     const [selectedDrugs, setSelectedDrugs] = useState([]);
     const [selectedAmounts, setSelectedAmounts] = useState({});
 
-    const dispatch = useDispatch();
+   
 
     const addToSelectedDrugs = (drug, availableAmount, original) => {
         if(drug.availableAmount>0){
@@ -140,6 +177,15 @@ function ListDrugs() {
        
       };
 
+    function handleContinue(){
+        console.log("continue");
+        setShouldRedirect(true);
+    }
+    if(shouldRedirect){
+        return <Redirect to="/payment" />;
+
+    }
+
    
 
     return (
@@ -216,7 +262,7 @@ function ListDrugs() {
                                 
                             ))}
                             <h2 className="text-2xl font-bold">
-                                Price:  {total} €  <button className="btn btn-accent">Checkout</button>
+                                Price:  {total} €  <button className="btn btn-accent" onClick={handleContinue}>Checkout</button>
                                 
                             </h2>
                             
