@@ -88,14 +88,14 @@ def get_tasks(request):
                 'output':{'S':task['output']},
             }
 
-        try:
-            response = dynamodb_client.put_item(
-                TableName='states',
-                Item=item
-            )
-            print(response)
-        except ClientError as e:
-            print("Error:", e.response['Error']['Message'])
+            try:
+                response = dynamodb_client.put_item(
+                    TableName='states',
+                    Item=item
+                )
+                print(response)
+            except ClientError as e:
+                print("Error:", e.response['Error']['Message'])
 
         return JsonResponse({'tasks': tasks_list})
     except Exception as e:
