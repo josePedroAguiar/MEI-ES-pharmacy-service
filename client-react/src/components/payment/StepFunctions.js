@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Redirect } from "react-router-dom";
 
 const StepFunctionsComponent = () => {
+  const [shouldRedirect, setShouldRedirect] = useState(false);
   const [output, setOutput] = useState('');
   const [tasks, setTasks] = useState([]);
   const [executionArn, setExecutionArn] = useState('');
 
   const startStepFunctions = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/run-scenario/');
+      const response = await axios.get('http://es-django-env.eba-bpqhs6uc.us-east-1.elasticbeanstalk.com/run-scenario/');
       console.log(response.data.execution_arn)
       setOutput(response.data.execution_arn);
       setExecutionArn(response.data.execution_arn);
@@ -20,7 +22,7 @@ const StepFunctionsComponent = () => {
 
   const getTasks = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/get-tasks/', {
+      const response = await axios.get('http://es-django-env.eba-bpqhs6uc.us-east-1.elasticbeanstalk.com/get-tasks/', {
         params: {
           execution_arn: executionArn,
         },
@@ -42,6 +44,16 @@ const StepFunctionsComponent = () => {
     }
   };
 
+
+  function handleContinue(){
+    console.log("continue");
+    setShouldRedirect(true);
+  }
+  if(shouldRedirect){
+    return <Redirect to="/" />;
+
+}
+
   return (
     <div className="container mx-auto">
       <div className="flex justify-center items-center my-5">
@@ -51,6 +63,7 @@ const StepFunctionsComponent = () => {
         <button className="btn" onClick={getTasks} disabled={executionArn === ''}>
           Check Robot Status
         </button>
+        
       </div>
   
       <div className="my-5">
@@ -73,6 +86,9 @@ const StepFunctionsComponent = () => {
           ))}
         </ul>
       </div>
+      <button className="btn" onClick={handleContinue}>
+          Finish
+        </button>
     </div>
   );
   

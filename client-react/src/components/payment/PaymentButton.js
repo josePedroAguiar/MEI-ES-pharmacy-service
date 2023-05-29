@@ -8,15 +8,6 @@ const PaymentButton = () => {
   const [shouldRedirect, setShouldRedirect] = useState(false);
   const [shouldRedirectStepFunctions, setShouldRedirectStepFunctions] = useState(false);
 
-  const handlePayment = async () => {
-      // Fazer uma solicitação POST para o backend Django para processar o pagamento
-      await axios.post('http://127.0.0.1:8000/process-payment2/');
-      console.log("continue");
-      setShouldRedirect(true);
-      if(shouldRedirect){
-        return <Redirect to="/reko" />;
-      }
-    };
     function handleContinue(){
       console.log("continue");
       setShouldRedirect(true);

@@ -32,8 +32,8 @@ def run_scenario(request):
     # Create an instance of the StateMachineScenario class
     print("ola")
     scenario = get_started_state_machines.StateMachineScenario(
-        get_started_state_machines.Activity(boto3.client('stepfunctions')),
-        get_started_state_machines.StateMachine(boto3.client('stepfunctions')),
+        get_started_state_machines.Activity(boto3.client('stepfunctions',region_name='us-east-1')),
+        get_started_state_machines.StateMachine(boto3.client('stepfunctions',region_name='us-east-1')),
         boto3.client('iam')
     )
 
@@ -62,12 +62,12 @@ def get_tasks(request):
     # Create an instance of the StateMachineScenario class
     scenario = get_started_state_machines.StateMachineScenario(
         None,
-        get_started_state_machines.StateMachine(boto3.client('stepfunctions')),
+        get_started_state_machines.StateMachine(boto3.client('stepfunctions',region_name='us-east-1')),
         None
     )
 
     # Get the current and executed tasks from the execution
-    state_machine_arn = 'arn:aws:states:us-east-1:364193402281:stateMachine:RobotWorkFlow'
+    state_machine_arn = 'arn:aws:states:us-east-1:869937572605:stateMachine:RobotWorkFlow'
     execution_arn = request.GET.get('execution_arn')
 
     try:
@@ -81,6 +81,21 @@ def get_tasks(request):
                 'timestamp': task['timestamp']
             }
             tasks_list.append(task_dict)
+            dynamodb_client = boto3.client('dynamodb', region_name='us-east-1')
+            item = {
+                'timestamp': {'S':str(task['timestamp'])},   # Convert year to string and wrap in a dictionary
+                'name': {'S':task['name']},      # Wrap title in a dictionary
+                'output':{'S':task['output']},
+            }
+
+        try:
+            response = dynamodb_client.put_item(
+                TableName='states',
+                Item=item
+            )
+            print(response)
+        except ClientError as e:
+            print("Error:", e.response['Error']['Message'])
 
         return JsonResponse({'tasks': tasks_list})
     except Exception as e:
