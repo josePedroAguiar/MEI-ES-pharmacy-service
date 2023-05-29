@@ -33,7 +33,7 @@ function ListDrugs() {
 
         
         useEffect(() => {
-            axios.get("http://127.0.0.1:8000/medicamentos/")
+            axios.get("http://es-django-env.eba-bpqhs6uc.us-east-1.elasticbeanstalk.com/medicamentos")
               .then((res) => {
                 setPharmDrugs(res.data);
                 console.log(res.data);
