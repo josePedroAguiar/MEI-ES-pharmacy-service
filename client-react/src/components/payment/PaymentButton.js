@@ -25,6 +25,8 @@ const PaymentButton = () => {
         <h2>Finalizar Pagamento</h2>
         <button onClick={handlePayment}>Finalizar Pagamento</button>
       </div>
+
+      
     );
   };
 

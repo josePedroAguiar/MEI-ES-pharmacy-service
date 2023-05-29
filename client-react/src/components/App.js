@@ -21,6 +21,7 @@ import PrivateRoute from "./common/PrivateRoute";
 import Medicamentos from './medicamentos/Medicamentos';
 import PaymentButton from './payment/PaymentButton';
 import DeliveryStatus from './payment/DeliveryStatus';
+import Test from './payment/test'
 //<Route path="/waiting" element={<Waiting />} />
 
 //Alert Options
@@ -53,6 +54,8 @@ render() {
                           <Route exact path="/medicamentos" component={Medicamentos}/>
                           <Route exact path="/payment" component={PaymentButton}/>
                           <Route exact path="/delivery" component={DeliveryStatus}/>
+                          <Route exact path="/test" component={Test}/>
+
                       </Switch> 
                   </div>
               </Fragment>
