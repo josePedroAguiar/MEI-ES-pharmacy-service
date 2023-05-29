@@ -21,10 +21,14 @@ const PaymentButton = () => {
   
 
     return (
-      <div>
-        <h2>Finalizar Pagamento</h2>
-        <button onClick={handlePayment}>Finalizar Pagamento</button>
-      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <h2 className="font-bold text-2xl py-10">Payment Mode:</h2>
+      <ul className="menu bg-base-100 w-56 p-2 rounded-box font-bold text-2xl py-15">
+        <li><a>Card</a></li>
+        <li><a>Ass</a></li>
+        <li><a>Face Rekognition</a></li>
+      </ul>
+    </div>
 
       
     );

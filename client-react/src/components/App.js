@@ -21,11 +21,9 @@ import PrivateRoute from "./common/PrivateRoute";
 import Medicamentos from './medicamentos/Medicamentos';
 import PaymentButton from './payment/PaymentButton';
 import DeliveryStatus from './payment/DeliveryStatus';
-<<<<<<< Updated upstream
 import Test from './payment/test'
-=======
 import Reko from './payment/Reko';
->>>>>>> Stashed changes
+
 //<Route path="/waiting" element={<Waiting />} />
 
 //Alert Options
@@ -58,12 +56,8 @@ render() {
                           <Route exact path="/medicamentos" component={Medicamentos}/>
                           <Route exact path="/payment" component={PaymentButton}/>
                           <Route exact path="/delivery" component={DeliveryStatus}/>
-<<<<<<< Updated upstream
                           <Route exact path="/test" component={Test}/>
-
-=======
                           <Route exact path="/reko" component={Reko}/>
->>>>>>> Stashed changes
                       </Switch> 
                   </div>
               </Fragment>
