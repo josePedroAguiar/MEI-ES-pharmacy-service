@@ -14,7 +14,7 @@ urlpatterns = [
     path('medicamentos/', MedView.as_view({'get': 'list', 'post': 'create'}), name='medicamentos-list'),
     path('medicamentos/<int:pk>/', MedView.as_view({'get': 'retrieve', 'put': 'update', 'patch': 'partial_update', 'delete': 'destroy'}), name='medicamentos-detail'),
     #path('process-payment/', process_payment, name='process-payment'),
-    path('process-payment2/', csrf_exempt(process_payment), name='process-payment'),
+    path('process-payment2/', csrf_exempt(process_payment), name='process-payment2'),
     path('process-payment/', csrf_exempt(get_task_outputs_api),name='process-payment'),
     #path('ws/step_function/', StepFunctionConsumer.as_asgi()),
    

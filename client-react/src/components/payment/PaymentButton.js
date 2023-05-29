@@ -11,12 +11,14 @@ const PaymentButton = () => {
       await axios.post('http://127.0.0.1:8000/process-payment2/');
       console.log("continue");
       setShouldRedirect(true);
+      if(shouldRedirect){
+        return <Redirect to="/delivery" />;
+      }
     };
   
-    if(shouldRedirect){
-      return <Redirect to="/delivery" />;
+    
 
-  }
+  
 
     return (
       <div>

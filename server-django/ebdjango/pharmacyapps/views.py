@@ -90,6 +90,7 @@ def process_payment(request):
     )
     arn_execution = response['executionArn']  # Obtém o arnExecution
     #arn_execution= 'arn:aws:states:us-east-1:048532038912:execution:RobotWorkFlow:5579d7b2-b47b-4af6-93ea-45cd2c5f45d0'
+    print(".............................")
     print(arn_execution)
     
     while True:
