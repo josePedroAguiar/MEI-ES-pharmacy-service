@@ -6,6 +6,7 @@ from django.db import models
 import hashlib
 import binascii
 import os
+
 class UserManager(models.Manager):
     def create_user(self, username, email, password):
         if not email:
@@ -34,10 +35,9 @@ class UserManager(models.Manager):
 class User(models.Model):
     class Meta:
         app_label = 'pharmacyapps'
-
     username = models.CharField(max_length=120, unique=True)
     email = models.EmailField(max_length=255, unique=True)
-    password = models.CharField(max_length=128, default='') # new field
+    password = models.CharField(max_length=120, default='') # new field
     last_login = models.DateTimeField(auto_now=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
@@ -191,14 +191,14 @@ class receitas(models.Model):
     name_user = models.CharField(max_length=100)
     med = models.ForeignKey(medicamentos, on_delete=models.CASCADE)
     
-    
+'''  
 
 # Create your models here.
-class User(models.Model):
+class Utentes(models.Model):
     username = models.CharField(max_length=120)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=120)
     last_login=models.DateTimeField()   
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True) 
-    '''
+

@@ -9,7 +9,7 @@ export const loadUser = () => (dispatch,getState) => {
 
 
     axios
-    .get('http://env-esdjango.eba-z3drmz5p.us-east-1.elasticbeanstalk.com/auth/user/', tokenConfig(getState))
+    .get('http://es-django-env.eba-bpqhs6uc.us-east-1.elasticbeanstalk.com/auth/user/', tokenConfig(getState))
     .then((res) => {
       dispatch({
         type: USER_LOADED,
@@ -38,7 +38,7 @@ export const loadUser = () => (dispatch,getState) => {
     const body = JSON.stringify({ username, email, password });
   
     axios
-      .post('http://env-esdjango.eba-z3drmz5p.us-east-1.elasticbeanstalk.com/auth/register/', body, config)
+      .post('http://es-django-env.eba-bpqhs6uc.us-east-1.elasticbeanstalk.com/auth/register/', body, config)
       .then((res) => {
         dispatch({
           type: REGISTER_SUCCESS,
@@ -70,7 +70,7 @@ export const loadUser = () => (dispatch,getState) => {
     const body = JSON.stringify({ username, password });
   
     axios
-      .post('http://env-esdjango.eba-z3drmz5p.us-east-1.elasticbeanstalk.com/auth/login/', body, config)
+      .post('http://es-django-env.eba-bpqhs6uc.us-east-1.elasticbeanstalk.com/auth/login/', body, config)
       .then((res) => {
         dispatch({
           type: LOGIN_SUCCESS,
@@ -89,7 +89,7 @@ export const loadUser = () => (dispatch,getState) => {
   // LOGOUT USER
 export const logout = () => (dispatch) => {
     axios
-      .post('http://env-esdjango.eba-z3drmz5p.us-east-1.elasticbeanstalk.com/auth/logout/')
+      .post('http://es-django-env.eba-bpqhs6uc.us-east-1.elasticbeanstalk.com/auth/logout/')
       .then((res) => {
         dispatch({ type: 'CLEAR_LEADS' });
         dispatch({

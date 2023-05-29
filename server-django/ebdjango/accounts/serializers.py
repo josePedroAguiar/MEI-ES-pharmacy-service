@@ -1,6 +1,15 @@
 from rest_framework import serializers
+
 #from django.contrib.auth.models import User
 from pharmacyapps.models import User
+from rest_framework.serializers import Serializer, FileField
+
+# Serializers define the API representation.
+class UploadSerializer(Serializer):
+    file_uploaded = FileField()
+    class Meta:
+        fields = ['file_uploaded']
+
 #from .models import User
 
 '''

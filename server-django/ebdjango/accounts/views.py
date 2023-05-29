@@ -12,7 +12,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .serializers import UserSerializer
-
+from .rekogntion import rekogntion
 
 
 
@@ -99,7 +99,20 @@ class LoginView(generics.GenericAPIView):
     return response
   
 
-  # Get User API
+
+class RekoView(generics.GenericAPIView):
+    #permission_classes = [permissions.IsAuthenticated,]
+    serializer_class = UserSerializer
+   
+       
+
+    def post(self,request):
+        file_uploaded = request.FILES.get('file_uploaded')
+        return JsonResponse({"resp:" : rekogntion("IMG_0358.jpeg",file_uploaded)})
+  
+    
+
+# Get User API
 class UserView(generics.RetrieveAPIView):
   #authentication_classes = [JWTAuthentication]
   permission_classes = [permissions.IsAuthenticated,]

@@ -10,7 +10,8 @@ export const getMeds = () => (dispatch) =>{
    
 
     axios
-        .get("http://127.0.0.1:8000/medicamentos/")
+        .get("http://es-django-env.eba-bpqhs6uc.us-east-1.elasticbeanstalk.com/medicamentos/")
+
         .then(res => {
             dispatch({
                 type: GET_MEDS,
@@ -26,7 +27,7 @@ export const deleteMeds = (id) => (dispatch) => {
 
 
     axios
-      .delete(`http://127.0.0.1:8000/medicamentos/${id}/`)
+      .delete(`http://es-django-env.eba-bpqhs6uc.us-east-1.elasticbeanstalk.com/medicamentos/${id}/`)
       .then((res) => {
         dispatch(createMessage({Delete_medicamento: "Medicamento Eliminado"}))
         dispatch({
@@ -42,7 +43,7 @@ export const addMeds = (medicamento) => (dispatch,getState) => {
 
 
     axios
-      .post('http://127.0.0.1:8000/medicamentos/', medicamento, tokenConfig(getState))
+      .post('http://es-django-env.eba-bpqhs6uc.us-east-1.elasticbeanstalk.com/medicamentos/', medicamento, tokenConfig(getState))
       .then((res) => {
         dispatch(createMessage({Add_medicamento: "Medicamento Adicionado"}))
         dispatch({
