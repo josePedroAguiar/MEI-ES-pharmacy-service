@@ -77,7 +77,8 @@ def get_tasks(request):
         for task in tasks:
             task_dict = {
                 'name': task['name'],
-                'output': task['output']
+                'output': task['output'],
+                'timestamp': task['timestamp']
             }
             tasks_list.append(task_dict)
 

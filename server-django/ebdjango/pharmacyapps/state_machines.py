@@ -72,26 +72,24 @@ class StateMachine:
         else:
             events = response.get('events', [])
             tasks = []
-            
+
             for event in events:
                 if event.get('type') == 'TaskStateExited':
-                    print(event)
-                    print(event.keys())
                     task_name = event.get('stateExitedEventDetails', {}).get('name', '')
                     task_output = event.get('stateExitedEventDetails', {}).get('output', '')
+                    timestamp = event.get('timestamp')
                     
                     if isinstance(task_output, str):
                         body = json.loads(task_output)
                         if 'body' in body:
                             response_data = body['body'].strip('"').strip()
-                            tasks.append({'name': task_name, 'output': response_data})
+                            tasks.append({'name': task_name, 'output': response_data, 'timestamp': timestamp})
                     elif isinstance(task_output, dict):
                         if 'body' in task_output:
                             response_data = task_output['body'].strip('"').strip()
-                            tasks.append({'name': task_name, 'output': response_data})
+                            tasks.append({'name': task_name, 'output': response_data, 'timestamp': timestamp})
 
-                                #return JsonResponse(response_data, safe=False)
-            return tasks
+        return tasks
     # snippet-start:[python.example_code.sfn.ListStateMachines]
     def find(self, name):
         """
