@@ -95,19 +95,11 @@ WSGI_APPLICATION = "ebdjango.wsgi.application"
 
 
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
-"""
-DB_ENDPOINT= 'http://localhost:8000'
-DB_TABLE= "my-table"
-"""
+
+
 """
 DATABASES = {
-     "default": {
+        "default": {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         "NAME": "postgres",
         "USER": "postgres",
@@ -116,9 +108,26 @@ DATABASES = {
         "PORT": 5432,
 
     }
+         "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
+
+DB_ENDPOINT= 'http://localhost:8000'
+DB_TABLE= "my-table"
+"""
+
+DATABASES = {
+
+  "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+
     
 }   
-"""
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -162,6 +171,6 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-AUTH_USER_MODEL = 'pharmacyapps.User'
+#AUTH_USER_MODEL = 'pharmacyapps.User'
 
 CORS_ALLOW_ALL_ORIGINS = True
