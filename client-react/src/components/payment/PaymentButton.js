@@ -20,7 +20,7 @@ const PaymentButton = () => {
       setShouldRedirect(true);
     }
     if(shouldRedirect){
-        return <Redirect to="/reco" />;
+        return <Redirect to="/reko" />;
 
     }
   
