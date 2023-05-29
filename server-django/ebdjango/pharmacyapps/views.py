@@ -77,13 +77,8 @@ def get_tasks(request):
         for task in tasks:
             task_dict = {
                 'name': task['name'],
-                'output': task['output'],
+                'output': task['output']
             }
-            if 'body' in task['output']:
-                print("ola")
-                response_data = task['output']['body'].strip('"').strip()
-                task_dict['body'] = response_data
-
             tasks_list.append(task_dict)
 
         return JsonResponse({'tasks': tasks_list})

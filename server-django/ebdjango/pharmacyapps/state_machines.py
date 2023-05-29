@@ -8,6 +8,7 @@ Shows how to use the AWS SDK for Python (Boto3) with AWS Step Functions to creat
 manage state machines.
 """
 
+import json
 import logging
 from botocore.exceptions import ClientError
 
@@ -73,10 +74,23 @@ class StateMachine:
             tasks = []
             
             for event in events:
-                if event.get('type') == 'TaskStateEntered':
-                    task_name = event.get('stateEnteredEventDetails', {}).get('name', '')
-                    task_output = event.get('stateEnteredEventDetails', {}).get('output', '')
-                    tasks.append({'name': task_name, 'output': task_output})
+                if event.get('type') == 'TaskStateExited':
+                    print(event)
+                    print(event.keys())
+                    task_name = event.get('stateExitedEventDetails', {}).get('name', '')
+                    task_output = event.get('stateExitedEventDetails', {}).get('output', '')
+                    
+                    if isinstance(task_output, str):
+                        body = json.loads(task_output)
+                        if 'body' in body:
+                            response_data = body['body'].strip('"').strip()
+                            tasks.append({'name': task_name, 'output': response_data})
+                    elif isinstance(task_output, dict):
+                        if 'body' in task_output:
+                            response_data = task_output['body'].strip('"').strip()
+                            tasks.append({'name': task_name, 'output': response_data})
+
+                                #return JsonResponse(response_data, safe=False)
             return tasks
     # snippet-start:[python.example_code.sfn.ListStateMachines]
     def find(self, name):
