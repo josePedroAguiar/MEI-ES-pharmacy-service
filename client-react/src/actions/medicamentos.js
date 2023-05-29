@@ -5,12 +5,12 @@ import { createMessage , returnErrors } from './messages';
 
 //GET_MEDS
 
-export const getMeds = () => (dispatch,getState) =>{
+export const getMeds = () => (dispatch) =>{
 
    
 
     axios
-        .get("http://127.0.0.1:8000/medicamentos/", tokenConfig(getState))
+        .get("http://127.0.0.1:8000/medicamentos/")
         .then(res => {
             dispatch({
                 type: GET_MEDS,
@@ -21,12 +21,12 @@ export const getMeds = () => (dispatch,getState) =>{
 };
 
 // DELETE MEDS
-export const deleteMeds = (id) => (dispatch,getState) => {
+export const deleteMeds = (id) => (dispatch) => {
 
 
 
     axios
-      .delete(`http://127.0.0.1:8000/medicamentos/${id}/`, tokenConfig(getState))
+      .delete(`http://127.0.0.1:8000/medicamentos/${id}/`)
       .then((res) => {
         dispatch(createMessage({Delete_medicamento: "Medicamento Eliminado"}))
         dispatch({

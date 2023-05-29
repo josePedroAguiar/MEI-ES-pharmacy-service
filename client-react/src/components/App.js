@@ -18,7 +18,9 @@ import Header from "./layout/Header";
 import Dashboard from "./medicamentos/Dashboard";
 import Alerts from "./layout/Alerts";
 import PrivateRoute from "./common/PrivateRoute";
-
+import Medicamentos from './medicamentos/Medicamentos';
+import PaymentButton from './payment/PaymentButton';
+import DeliveryStatus from './payment/DeliveryStatus';
 //<Route path="/waiting" element={<Waiting />} />
 
 //Alert Options
@@ -48,7 +50,9 @@ render() {
                           <Route exact path="/register" component={Register} />
                           <Route exact path="/login" component={Login} />
                           <PrivateRoute exact path="/list" component={ListDrugs} />
-
+                          <Route exact path="/medicamentos" component={Medicamentos}/>
+                          <Route exact path="/payment" component={PaymentButton}/>
+                          <Route exact path="/delivery" component={DeliveryStatus}/>
                       </Switch> 
                   </div>
               </Fragment>
