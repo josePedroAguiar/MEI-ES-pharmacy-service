@@ -52,12 +52,12 @@ render() {
                           <Route exact path="/register" component={Register} />
                           <Route exact path="/login" component={Login} />
                           <PrivateRoute exact path="/list" component={ListDrugs} />
-                          <Route exact path="/medicamentos" component={Medicamentos}/>
-                          <Route exact path="/payment" component={PaymentButton}/>
-                          <Route exact path="/delivery" component={DeliveryStatus}/>
-                          <Route exact path="/step" component={Test}/>
+                          <PrivateRoute exact path="/medicamentos" component={Medicamentos}/>
+                          <PrivateRoute exact path="/payment" component={PaymentButton}/>
+                          <PrivateRoute exact path="/delivery" component={DeliveryStatus}/>
+                          <PrivateRoute exact path="/step" component={Test}/>
 
-                          <Route exact path="/reko" component={Reko}/>
+                          <PrivateRoute exact path="/reko" component={Reko}/>
                       </Switch> 
                   </div>
               </Fragment>

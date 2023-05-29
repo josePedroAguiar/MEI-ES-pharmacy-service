@@ -46,10 +46,10 @@ const StepFunctionsComponent = () => {
     <div className="container mx-auto">
       <div className="flex justify-center items-center my-5">
         <button className="btn mr-3" onClick={startStepFunctions} disabled={executionArn !== ''}>
-          Start Step Functions
+          Confirm
         </button>
         <button className="btn" onClick={getTasks} disabled={executionArn === ''}>
-          Get Tasks
+          Check Robot Status
         </button>
       </div>
   

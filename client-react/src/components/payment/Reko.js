@@ -23,7 +23,6 @@ const Reko = () => {
   };
 
   const submitPhoto = () => {
-    // Replace 'YOUR_SUBMIT_URL' with the actual URL where you want to submit the photo
     const submitUrl = ' http://es-django-env.eba-bpqhs6uc.us-east-1.elasticbeanstalk.com/auth/payment/';
         // Convert the picture data to a Blob object
         const blob = dataURItoBlob(picture);
@@ -40,11 +39,9 @@ const Reko = () => {
             },
           })
           .then(response => {
-            // Handle the response if needed
             console.log(response);
           })
           .catch(error => {
-            // Handle the error if needed
             console.error(error);
           });
       };

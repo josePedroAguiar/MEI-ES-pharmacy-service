@@ -6,6 +6,8 @@ import { Redirect } from "react-router-dom";
 
 const PaymentButton = () => {
   const [shouldRedirect, setShouldRedirect] = useState(false);
+  const [shouldRedirectStepFunctions, setShouldRedirectStepFunctions] = useState(false);
+
   const handlePayment = async () => {
       // Fazer uma solicitação POST para o backend Django para processar o pagamento
       await axios.post('http://127.0.0.1:8000/process-payment2/');
@@ -19,20 +21,24 @@ const PaymentButton = () => {
       console.log("continue");
       setShouldRedirect(true);
     }
+    function handleClick(){
+      setShouldRedirectStepFunctions(true);
+    }
     if(shouldRedirect){
         return <Redirect to="/reko" />;
 
     }
-  
-
-  
+    if(shouldRedirectStepFunctions){
+      return <Redirect to="/step" />;
+    }
+    
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <h2 className="font-bold text-2xl py-10">Payment Mode:</h2>
       <ul className="menu bg-base-100 w-56 p-2 rounded-box font-bold text-2xl py-15">
-        <li><a>Card</a></li>
-        <li><a>Money</a></li>
+        <li><a onClick={handleClick}>Card</a></li>
+        <li><a onClick={handleClick}>Money</a></li>
         <li><a onClick={handleContinue}>Face Rekognition</a></li>
       </ul>
     </div>
