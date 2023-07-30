@@ -1,2 +1,2 @@
 # pharmacy-service-ES
-django
+Django rest + React.js (using Axios)
